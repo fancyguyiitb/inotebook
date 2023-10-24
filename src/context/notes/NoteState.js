@@ -80,10 +80,21 @@ const NoteState = (props) => {
   };
 
   //Delete a note
-  const deleteNote = () => {};
+  const deleteNote = (id) => {
+    console.log("Deleted note with id: " + id);
+
+    //deleting the note with that id from the array
+    //for this we use the filter function; 
+    //filter function allows only those notes in the array whose 
+    //id is different from the one to be deleted
+    const newNotes = notes.filter((note)=>{return note._id !== id})
+    setNotes(newNotes);
+  };
 
   //Edit a note
-  const editNote = () => {};
+  const editNote = (id, description, tag) => {
+    console.log("Modified note with id: " + id);
+  };
 
   return (
     <noteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
