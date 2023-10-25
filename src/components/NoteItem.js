@@ -10,6 +10,7 @@ const NoteItem = (props) => {
   //fetching the delete note function rom context
   const context = useContext(noteContext)
   const {deleteNote} = context;
+  const {editNote} = context;
   return (
     <div className="col-md-3">
       {/* using bootstrap cards to display data */}
@@ -20,7 +21,7 @@ const NoteItem = (props) => {
         </div>
 
         {/* adding control  buttons to each note */}
-        <button type="button" className="btn btn-outline-info py-1" onClick={()=>{}}>
+        <button type="button" className="btn btn-outline-info py-1" onClick={()=>{editNote(note._id, "sarthak", "Sarthak", "Personal!")}}>
           Edit Note
         </button>
         <button type="button" className="btn btn-outline-info py-1 mt-2" onClick={()=>{deleteNote(note._id)}}>
