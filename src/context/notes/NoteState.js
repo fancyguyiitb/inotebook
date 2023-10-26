@@ -17,7 +17,8 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNhZmE5ODExM2EwNTI0YWI3M2RmZCIsImlhdCI6MTY5Nzk2NTM4OX0.-ZpBhJv8WsICm1COJsvY56YXRZWK0YUtePL7tb_U8BI",
+        //bringing the auth token from local storage...
+          localStorage.getItem('token'),
       },
     });
 
@@ -36,24 +37,15 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNhZmE5ODExM2EwNTI0YWI3M2RmZCIsImlhdCI6MTY5Nzk2NTM4OX0.-ZpBhJv8WsICm1COJsvY56YXRZWK0YUtePL7tb_U8BI",
+          localStorage.getItem('token'),
       },
       body: JSON.stringify({ title, description, tag }),
     });
 
-    console.log("Adding new note...");
-    let note = {
-      _id: "653757d5d12a5932bff4ba49",
-      user: "6533afa98113a0524ab73dfd",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2023-10-24T05:36:21.015Z",
-      __v: 0,
-    };
-
+    const note = await response.json();
     //pushing the new note into the notes array
     setNotes(notes.concat(note));
+    
   };
 
   //Delete a note
@@ -68,7 +60,7 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNhZmE5ODExM2EwNTI0YWI3M2RmZCIsImlhdCI6MTY5Nzk2NTM4OX0.-ZpBhJv8WsICm1COJsvY56YXRZWK0YUtePL7tb_U8BI",
+          localStorage.getItem('token'),
       },
     });
 
@@ -93,7 +85,7 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNhZmE5ODExM2EwNTI0YWI3M2RmZCIsImlhdCI6MTY5Nzk2NTM4OX0.-ZpBhJv8WsICm1COJsvY56YXRZWK0YUtePL7tb_U8BI",
+          localStorage.getItem('token'),
       },
       body: JSON.stringify({ title, description, tag }),
     });

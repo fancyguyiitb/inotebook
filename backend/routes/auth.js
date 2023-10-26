@@ -29,13 +29,17 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    let success = false;
+
     //check whether email exists already
     //we use user.create which returns a promise
     try {
       let user = await User.findOne({ email: req.body.email }); //wai until promise resolved
       //return error message if the email already exists
       if (user) {
-        return res.status(400).json({ error: "This email already exists" });
+        return res
+          .status(400)
+          .json({ success, error: "This email already exists" });
       }
 
       //creating a SECURE password hash
@@ -55,12 +59,13 @@ router.post(
       };
 
       const authToken = jwt.sign(data, JWT_SECRET);
-      console.log(authToken);
+      console.log({ success, authToken });
 
       //   res.json(user);
       //   console.log(user);
 
-      res.json({ authToken });
+      success = true;
+      res.json({ success, authToken });
     } catch (error) {
       //catching and dealing with errors
       console.error(error.message);
@@ -79,6 +84,7 @@ router.post(
     body("password", "Password cannot be blank!").exists(),
   ],
   async (req, res) => {
+    let success = false;
     //If errors, return bad request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -109,9 +115,9 @@ router.post(
       const data = {
         id: user.id,
       };
-
+      success = true;
       const authToken = jwt.sign(data, JWT_SECRET);
-      res.send(authToken);
+      res.send({ success, authToken });
     } catch (error) {
       //catching and dealing with errors
       console.error(error.message);

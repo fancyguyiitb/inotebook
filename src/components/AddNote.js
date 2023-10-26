@@ -14,6 +14,9 @@ const AddNote = () => {
     //preventing page reload when we hit submit
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
+
+    //after the note has been added, clear all input fields
+    setNote({ title: "", description: "", tag: "default" });
   };
 
   //making the onChange function
@@ -40,6 +43,9 @@ const AddNote = () => {
             name="title"
             aria-describedby="emailHelp"
             onChange={onChange}
+            minLength={5}
+            value={note.title}
+            required
           />
         </div>
         <div className="mb-3">
@@ -52,10 +58,14 @@ const AddNote = () => {
             id="description"
             name="description"
             onChange={onChange}
+            minLength={5}
+            value={note.description}
+            required
           />
         </div>
 
-        <button type="submit" className="btn btn-primary" onClick={handleClick}>
+        {/* disabling the button if form not filled properly! */}
+        <button disabled={note.title.length<5 || note.title.length<5} type="submit" className="btn btn-primary" onClick={handleClick}>
           Add to notes...
         </button>
       </form>
